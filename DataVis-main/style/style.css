@@ -1,0 +1,62 @@
+html {
+    scroll-behavior: smooth;
+}
+
+body {
+    min-height: 100vh;
+    position: relative;
+    margin: 0;
+    font-family: 'Inter', sans-serif;
+    color: white;
+    background-image: url(https://images.unsplash.com/photo-1561903613-7c4cc3fd9e01?q=80&w=1776&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D);
+    background-size: 100%;
+}
+
+#map svg {
+    border: 1px solid #3e3e3e;
+}
+
+.tooltip {
+    position: absolute;
+    background-color: rgba(0, 150, 250, 0.8);
+    color: white;
+    padding: 5px;
+    border-radius: 5px;
+    pointer-events: none;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+}
+
+#globeContainer {
+    position: relative;
+}
+
+#diagram {
+    position: relative;
+}
+
+#intro {
+    text-align: center;
+    padding: 100px;
+}
+
+.content {
+    text-align: center;
+    padding: 20px;
+}
+
+#viz {
+    color: black;
+    position: relative;
+    background: white;
+    margin: 0;
+    padding: 0;
+}
+
+footer {
+    margin: 0;
+    padding: 10px;
+    text-align: center;
+    background-color: darkgrey;
+    color: whitesmoke;
+}
