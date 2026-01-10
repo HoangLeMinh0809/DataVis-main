@@ -55,6 +55,9 @@ body{
     cursor: pointer;
     
 }
+#map {
+    position: relative;
+}
 #map svg{
     display: flex;
     margin: auto;
