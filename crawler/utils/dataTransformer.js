@@ -97,7 +97,7 @@ class DataTransformer {
 
     /**
      * Transform cho dữ liệu tuổi và giới tính
-     * TODO: Tùy chỉnh theo cấu trúc API thực tế
+     *
      */
     transformAgeandsex(data, source) {
         if (Array.isArray(data)) return data;
@@ -115,7 +115,7 @@ class DataTransformer {
 
     /**
      * Transform cho dữ liệu GDP
-     * TODO: Tùy chỉnh theo cấu trúc API thực tế
+     *
      */
     transformGdpPennWorldTable(data, source) {
         // Ví dụ: API Penn World Table format
@@ -132,7 +132,7 @@ class DataTransformer {
 
     /**
      * Transform cho dữ liệu NZ
-     * TODO: Tùy chỉnh theo cấu trúc API thực tế
+     *
      */
     transformNzData(data, source) {
         if (data.dataset) {
@@ -147,7 +147,7 @@ class DataTransformer {
 
     /**
      * Transform cho dữ liệu di cư NZ
-     * TODO: Tùy chỉnh theo cấu trúc API thực tế
+     *
      */
     transformNZMIGRATION(data, source) {
         if (data.migration) {
@@ -163,7 +163,7 @@ class DataTransformer {
 
     /**
      * Transform cho dữ liệu radar NZ
-     * TODO: Tùy chỉnh theo cấu trúc API thực tế
+     *
      */
     transformNzRadio(data, source) {
         if (data.indicators) {
@@ -177,7 +177,8 @@ class DataTransformer {
 
     /**
      * Transform cho dữ liệu treemap
-     * TODO: Tùy chỉnh theo cấu trúc API thực tế
+     *
+
      */
     transformDataTreemap(data, source) {
         if (data.categories) {
