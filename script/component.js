@@ -123,3 +123,29 @@ function downloadAllData() {
 }
 
 window.downloadAllData = downloadAllData;
+// Render initial insights when page loads
+document.addEventListener('DOMContentLoaded', async function() {
+    setTimeout(async () => {
+        if (typeof insightsGen !== 'undefined') {
+            await insightsGen.loadData();
+            
+            // Render default insights for year 2023
+            const defaultYear = 2023;
+            const insight = insightsGen.getChoroplethInsights(defaultYear);
+            insightsGen.renderInsight('choroplethInsight', insight);
+            
+            // Render default line chart insight for Vietnam
+            const defaultCountry = 'Vietnam';
+            const lineInsight = insightsGen.getLineChartInsights(defaultCountry);
+            insightsGen.renderInsight('lineChartInsight', lineInsight);
+            
+            // Render radar chart insight
+            const radarInsight = insightsGen.getRadarChartInsights(defaultCountry);
+            insightsGen.renderInsight('radarChartInsight', radarInsight);
+            
+            // Render treemap insight
+            const treemapInsight = insightsGen.getTreemapInsights();
+            insightsGen.renderInsight('treemapInsight', treemapInsight);
+        }
+    }, 500);
+});

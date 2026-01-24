@@ -204,6 +204,12 @@ function init() {
                 console.log(selectedValue);
                 updateJson();
                 
+                // Update insights for choropleth
+                if (insightsGen) {
+                    const insight = insightsGen.getChoroplethInsights(selectedValue);
+                    insightsGen.renderInsight('choroplethInsight', insight);
+                }
+                
                 // Update scatter plot when year changes
                 updateScatterPlot(null, null, null);
                 
@@ -323,6 +329,18 @@ function init() {
                     d3.selectAll(".countryName").text(name);
                     drawGraph(name);
                     drawRadar(name);
+                    
+                    // Update line chart insights
+                    if (insightsGen) {
+                        const insight = insightsGen.getLineChartInsights(name);
+                        insightsGen.renderInsight('lineChartInsight', insight);
+                    }
+                    
+                    // Update radar chart insights
+                    if (insightsGen) {
+                        const insight = insightsGen.getRadarChartInsights(name);
+                        insightsGen.renderInsight('radarChartInsight', insight);
+                    }
                 });
 
             console.log(nzLocation);

@@ -3,8 +3,9 @@ body{
 }
 #viz {
     display: block;
-    width: 70%;
+    width: 85%;
     margin: auto;
+    max-width: 1400px;
 }
 #globeContainer {
     display : block;
@@ -77,33 +78,17 @@ body{
     display: flex;
     margin: auto;
 }
+
+#treemap {
+    min-height: 400px;
+}
+
+.radarChart {
+    min-height: 500px;
+}
+
 .tooltip2 {
     position: absolute;
-}
-
-.sidenav {
-    right: 10px;
-    width: 250px;
-    position: fixed;
-    z-index: 1;
-    top: 40%;
-    background: #2196F3;
-    overflow-x: hidden;
-    padding: 8px 0;
-    border-radius: 10px;
-    border: black 3px solid;
-}
-
-.sidenav a {
-    padding: 6px 8px 6px 16px;
-    text-decoration: none;
-    font-size: 25px;
-    color: white;
-    display: block;
-}
-
-.sidenav a:hover {
-    color: #064579;
 }
 
 @media screen and (max-height: 450px) {

@@ -86,6 +86,12 @@ function init() {
             .attr("fill", "white")
             .attr("width", "10px")
             .attr("class", "treeContent")
+        
+        // Render treemap insights
+        if (typeof insightsGen !== 'undefined') {
+            const insight = insightsGen.getTreemapInsights();
+            insightsGen.renderInsight('treemapInsight', insight);
+        }
     });
 }
 

@@ -81,7 +81,7 @@ app.get('/api/countries', (req, res) => {
 });
 
 /**
- * Get migration data with filters
+ * Get migration data with filters (uses pre-aggregated table)
  * Query params: year, country, limit
  */
 app.get('/api/migration', (req, res) => {
@@ -93,20 +93,18 @@ app.get('/api/migration', (req, res) => {
                 c.country_name,
                 c.region,
                 c.continent,
-                t.year,
-                f.arrival_count,
-                f.departure_count,
-                f.net_migration
-            FROM fact_migration f
-            JOIN dim_country c ON f.country_id = c.country_id
-            JOIN dim_time t ON f.time_id = t.time_id
+                a.year,
+                a.total_arrivals AS arrivals,
+                a.total_net_migration AS net_migration
+            FROM agg_migration_yearly a
+            JOIN dim_country c ON a.country_id = c.country_id
             WHERE 1=1
         `;
         
         const params = [];
         
         if (year) {
-            sql += ' AND t.year = ?';
+            sql += ' AND a.year = ?';
             params.push(parseInt(year));
         }
         
@@ -115,7 +113,7 @@ app.get('/api/migration', (req, res) => {
             params.push(country);
         }
         
-        sql += ` ORDER BY t.year DESC, f.arrival_count DESC LIMIT ?`;
+        sql += ' ORDER BY a.year DESC, a.total_arrivals DESC LIMIT ?';
         params.push(parseInt(limit));
         
         const data = db.prepare(sql).all(...params);
@@ -131,7 +129,7 @@ app.get('/api/migration', (req, res) => {
 });
 
 /**
- * Get migration by country (for line chart)
+ * Get migration by country (for line chart) - uses pre-aggregated table
  */
 app.get('/api/migration/country/:country', (req, res) => {
     try {
@@ -139,16 +137,13 @@ app.get('/api/migration/country/:country', (req, res) => {
         
         const data = db.prepare(`
             SELECT 
-                t.year,
-                SUM(f.arrival_count) as arrivals,
-                SUM(f.departure_count) as departures,
-                SUM(f.net_migration) as net_migration
-            FROM fact_migration f
-            JOIN dim_country c ON f.country_id = c.country_id
-            JOIN dim_time t ON f.time_id = t.time_id
+                a.year,
+                a.total_arrivals AS arrivals,
+                a.total_net_migration AS net_migration
+            FROM agg_migration_yearly a
+            JOIN dim_country c ON a.country_id = c.country_id
             WHERE c.country_name = ?
-            GROUP BY t.year
-            ORDER BY t.year ASC
+            ORDER BY a.year ASC
         `).all(country);
         
         res.json({ 
@@ -162,7 +157,7 @@ app.get('/api/migration/country/:country', (req, res) => {
 });
 
 /**
- * Get migration by year (for choropleth map)
+ * Get migration by year (for choropleth map) - uses pre-aggregated table
  */
 app.get('/api/migration/year/:year', (req, res) => {
     try {
@@ -173,13 +168,11 @@ app.get('/api/migration/year/:year', (req, res) => {
                 c.country_name,
                 c.region,
                 c.continent,
-                SUM(f.arrival_count) as arrivals,
-                SUM(f.net_migration) as net_migration
-            FROM fact_migration f
-            JOIN dim_country c ON f.country_id = c.country_id
-            JOIN dim_time t ON f.time_id = t.time_id
-            WHERE t.year = ?
-            GROUP BY c.country_name, c.region, c.continent
+                a.total_arrivals AS arrivals,
+                a.total_net_migration AS net_migration
+            FROM agg_migration_yearly a
+            JOIN dim_country c ON a.country_id = c.country_id
+            WHERE a.year = ?
             ORDER BY arrivals DESC
         `).all(parseInt(year));
         

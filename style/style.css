@@ -107,3 +107,127 @@ footer {
 .error-message button:hover {
     background-color: #1976D2;
 }
+
+/* Insights Panel - Clean Table Design */
+.insight-panel {
+    background: #ffffff;
+    border: 1px solid #ddd;
+    font-family: 'Inter', -apple-system, sans-serif;
+    height: 100%;
+}
+
+.insight-header {
+    background: #f5f5f5;
+    padding: 10px 14px;
+    border-bottom: 1px solid #ddd;
+}
+
+.insight-header h4 {
+    margin: 0;
+    font-size: 13px;
+    font-weight: 600;
+    color: #333;
+}
+
+.insight-body {
+    padding: 0;
+}
+
+.insight-section {
+    border-bottom: 1px solid #eee;
+}
+
+.insight-section:last-child {
+    border-bottom: none;
+}
+
+.section-heading {
+    background: #fafafa;
+    padding: 6px 14px;
+    font-size: 11px;
+    font-weight: 600;
+    color: #666;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    border-bottom: 1px solid #eee;
+}
+
+.insight-table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+.insight-table tr {
+    border-bottom: 1px solid #f0f0f0;
+}
+
+.insight-table tr:last-child {
+    border-bottom: none;
+}
+
+.insight-table td {
+    padding: 8px 14px;
+    font-size: 12px;
+    vertical-align: top;
+}
+
+.insight-table td.label {
+    color: #555;
+    width: 50%;
+}
+
+.insight-table td.value {
+    color: #333;
+    font-weight: 500;
+    text-align: right;
+}
+
+/* Chart + Insight Side by Side Layout */
+.chart-insight-row {
+    display: flex;
+    gap: 20px;
+    padding: 20px;
+    align-items: flex-start;
+}
+
+.chart-container {
+    flex: 1;
+    min-width: 0;
+}
+
+.insight-side {
+    width: 350px;
+    flex-shrink: 0;
+}
+
+/* 2x2 Grid for Summary Insights */
+.insights-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 20px;
+    padding: 20px;
+}
+
+.insights-grid .insight-panel {
+    margin: 0;
+}
+
+.insight-container {
+    margin: 20px 0;
+    padding: 0 20px;
+}
+
+/* Responsive */
+@media (max-width: 1200px) {
+    .chart-insight-row {
+        flex-direction: column;
+    }
+    
+    .insight-side {
+        width: 100%;
+    }
+    
+    .insights-grid {
+        grid-template-columns: 1fr;
+    }
+}
